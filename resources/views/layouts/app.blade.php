@@ -11,6 +11,10 @@
 </head>
 <body>
 <div class="container mt-4">
+    <nav class="mb-4">
+        <a href="/">Главная</a>
+        <a href="{{ route('articles.index') }}" class="ml-3">Articles</a>
+    </nav>
     <h1>@yield('header')</h1>
     <div>
         @yield('content')
