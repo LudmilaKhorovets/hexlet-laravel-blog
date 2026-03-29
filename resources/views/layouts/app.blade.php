@@ -19,7 +19,6 @@
     <nav class="mb-4">
         <a href="/">Главная</a>
         <a href="{{ route('articles.index') }}" class="ml-3">Статьи</a>
-        <a href="{{ route('articles.create') }}" class="ml-3">Создать статью</a>
     </nav>
     <h1>@yield('header')</h1>
     <div>

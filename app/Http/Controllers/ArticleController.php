@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Articles\EditRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -39,5 +40,24 @@ class ArticleController extends Controller
         return redirect()
             ->route('articles.index')
             ->with('status', 'Статья успешно создана!');
+    }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update(EditRequest $request, $id)
+    {
+        $article = Article::findOrFail($id);
+
+        $data = $request->validated();
+
+        $article->fill($data);
+        $article->save();
+        return redirect()
+            ->route('articles.index')
+            ->with('status', 'Статья успешно обновлена!');
     }
 }
