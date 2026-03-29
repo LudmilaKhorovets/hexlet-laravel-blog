@@ -8,24 +8,29 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-
-    public function index() {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
         $articles = Article::paginate();
         return view('articles.index', compact('articles'));
     }
 
-    public function show($id) {
-        $article = Article::findOrFail($id);
-        return view('articles.show', compact('article'));
-    }
-
-    public function create() {
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
         $article = new Article();
         return view('articles.create', compact('article'));
     }
 
-    public function store(Request $request) {
-
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'name' => 'required|unique:articles',
             'body' => 'required|min:1000',
@@ -42,17 +47,28 @@ class ArticleController extends Controller
             ->with('status', 'Статья успешно создана!');
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
+        return view('articles.show', compact('article'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Article $article)
+    {
         return view('articles.edit', compact('article'));
     }
 
-    public function update(EditRequest $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(EditRequest $request, Article $article)
     {
-        $article = Article::findOrFail($id);
-
-        $data = $request->validated();
+       $data = $request->validated();
 
         $article->fill($data);
         $article->save();
@@ -61,12 +77,12 @@ class ArticleController extends Controller
             ->with('status', 'Статья успешно обновлена!');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Article $article)
     {
-        $article = Article::find($id);
-        if ($article) {
-            $article->delete();
-        }
+        $article->delete();
         return redirect()->route('articles.index');
     }
 }

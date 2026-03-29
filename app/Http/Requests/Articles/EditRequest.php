@@ -22,7 +22,9 @@ class EditRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('id');
+        $article = $this->route('article');
+
+        $id = is_object($article) ? $article->id : $article;
 
         return [
             'name' => "required|unique:articles,name,{$id}",
