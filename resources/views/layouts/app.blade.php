@@ -10,10 +10,16 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 <div class="container mt-4">
     <nav class="mb-4">
         <a href="/">Главная</a>
-        <a href="{{ route('articles.index') }}" class="ml-3">Articles</a>
+        <a href="{{ route('articles.index') }}" class="ml-3">Статьи</a>
+        <a href="{{ route('articles.create') }}" class="ml-3">Создать статью</a>
     </nav>
     <h1>@yield('header')</h1>
     <div>
