@@ -6,8 +6,9 @@
     @foreach($articles as $article)
         <div>
             <a href="{{ route('articles.show', $article->id) }}">{{ $article->name }}</a>
+            (<a href="{{ route('articles.edit', $article->id) }}">Редактировать</a>),
+            (<a href="{{ route('articles.destroy', $article) }}" data-confirm="Вы уверены?" data-method="delete" class="fa fa-remove" rel="nofollow">Удалить </a>)
             <div>{{ Str::limit($article->body, 200) }}</div>
-            <a href="{{ route('articles.edit', $article->id) }}" class="ml-3">Редактировать статью</a>
         </div>
     @endforeach
 @endsection
